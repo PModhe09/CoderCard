@@ -2,9 +2,9 @@
 import { signOut } from 'next-auth/react'
 import React from 'react'
 
-const LogoutWithGoogle = () => {
+const LogoutWithGoogle = ({className='flex items-center gap-2 border p-2 px-4 shadow'}) => {
   return (
-    <button className='border gap-2 p-2 flex items-center px-4 shadow' onClick={()=>signOut()}>
+    <button className={className} onClick={()=>signOut()}>
         Log Out from Google
     </button>
   )
