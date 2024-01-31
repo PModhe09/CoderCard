@@ -3,7 +3,7 @@ import grabUsername from "@/app/actions/grabUsername";
 import { redirect } from "next/navigation";
 import { useState } from "react";
 import {useFormState} from 'react-dom'
-import SubmitUsernameButton from "../Buttons/SubmitUsernameButton";
+import SubmitUsernameButton from "../Buttons/SubmitButton";
 
 function UserNameForm({desiredUsername}){
     const [taken,setTaken] = useState(false);

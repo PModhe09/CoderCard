@@ -6,3 +6,25 @@ body{
   @apply bg-slate-50
 }
 
+.radio-togglers{
+  @apply p-2 bg-white inline-flex;
+}
+
+.radio-togglers span{
+  @apply bg-white p-2 px-4 shadow;
+}
+
+.radio-togglers input[type="radio"]{
+  @apply hidden;
+}
+
+.radio-togglers input[type="radio"]:checked + span{
+  @apply bg-red-400;
+}
+
+label.card-input-user-info{
+  @apply border border-red-500 uppercase;
+}
+input[type="text"],textarea{
+  @apply bg-gray-300 w-full block py-2 px-2 mb-2;
+}

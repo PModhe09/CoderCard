@@ -7,6 +7,7 @@ import Image from "next/image";
 import { redirect } from "next/navigation";
 import Link from "next/link";
 import LogoutWithGoogle from "@/components/Buttons/LogoutWithGoogle";
+import ClientPageAside from "@/components/layouts/ClientPageAside";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -31,15 +32,7 @@ export default async function ClientPageLayout({ children }) {
                 <Image alt={'profile'} src={session.user.image} width={64} height={48}
                 />
                 </div>
-                <nav className="flex flex-col text-center mt-8 gap-4">
-                   <Link href={'/account'}><span>My Card</span></Link>
-                   <Link href={'/analytics'}><span>Analytics</span></Link>
-                   {/* <button type="button" className="flex gap-4" onClick={()=>{}}>
-                    <span>Logout</span>
-                   </button> */}
-                   <LogoutWithGoogle className={'flex gap-4 items-center'}/>
-                   <Link href={'/'}>Home</Link>
-                </nav>
+                <ClientPageAside/>
              </aside>
              <div className="grow">
                <div className="bg-white shadow w-full m-4 p-4">

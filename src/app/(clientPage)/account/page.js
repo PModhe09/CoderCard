@@ -7,6 +7,7 @@ import UserNameForm from '@/components/Forms/UserNameForm'
 import { redirect } from 'next/navigation'
 import { UserPage } from '../../models/UserPage'
 import mongoose from 'mongoose'
+import CardSettings from '@/components/Forms/CardSettings'
 
 const AccountPage = async({searchParams}) => {
     const session = await getServerSession(authOptions);
@@ -15,11 +16,12 @@ const AccountPage = async({searchParams}) => {
       redirect('/')
     }
    // console.log(req);
+  // console.log(2)
    mongoose.connect(process.env.MONGODB_URI)
    const card = await UserPage.findOne({pageOf:session?.user?.email})
    if(card){
     return(
-      <div>Ur page is {card.username}</div>
+      <CardSettings card={card} user={session.user}/>
     )
    }
   return (
