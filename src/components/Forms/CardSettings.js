@@ -3,6 +3,7 @@ import RadioTogglers from "../CardPageItems/RadioTogglers";
 import Image from "next/image";
 import SubmitButton from "../Buttons/SubmitButton";
 import { grabCardOwnerInfo } from "@/app/actions/grabCardOwnerInfo";
+import toast from "react-hot-toast";
 
 export default   function CardSettings({card,user}){
     const saveCardOwnerInfo=async(formData)=>{
@@ -12,6 +13,9 @@ export default   function CardSettings({card,user}){
         //console.log(formData);
         
         const res = await grabCardOwnerInfo(formData);
+        if(res===true){
+            toast.success('Card Owner Details are saved!');
+        }
         console.log({res});
         console.log('carowner');
     }
@@ -38,9 +42,9 @@ export default   function CardSettings({card,user}){
                 <label className="card-input-user-info">Enter your Name</label>
                 <input type="text" id="cardOwnerDisplayName" name="cardOwnerDisplayName" defaultValue={user?.name} placeholder="Enter your Name"/>
                 <label className="card-input-user-info">Location</label>
-                <input type="text" id="currentLocation" name="currentLocation" defaultValue={user?.location} placeholder="Enter your current Location"/>
+                <input type="text" id="currentLocation" name="currentLocation" defaultValue={card?.currentLocation} placeholder="Enter your current Location"/>
                 <label className="card-input-user-info">Bio</label>
-                <textarea name="bio" id="bio" defaultValue={user?.bio} placeholder="Write your Bio"/>
+                <textarea name="bio" id="bio" defaultValue={card?.bio} placeholder="Write your Bio"/>
                 <input/>
                 <div className="max-w-[200px] mx-auto">
                   <SubmitButton>

@@ -8,6 +8,7 @@ import { redirect } from "next/navigation";
 import Link from "next/link";
 import LogoutWithGoogle from "@/components/Buttons/LogoutWithGoogle";
 import ClientPageAside from "@/components/layouts/ClientPageAside";
+import { Toaster } from "react-hot-toast";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -37,6 +38,7 @@ export default async function ClientPageLayout({ children }) {
              <div className="grow">
                <div className="bg-white shadow w-full m-4 p-4">
                {children}
+                   <Toaster/>
                </div>
                  
              </div>
