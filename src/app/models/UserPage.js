@@ -5,6 +5,9 @@ const UserInfoSchema = new Schema({
     cardOwnerDisplayName:{type:String,default:''},
     currentLocation:{type:String,default:''},
     bio:{type:String,default:''},
+    coverType:{type:String,default:'color'},
+    coverColor:{type:String,default:'#000'},
+    coverImage:{type:String,default:''},
 },{timestamps:true})
 
 export const UserPage =models?.UserPage ||  model('UserPage',UserInfoSchema);

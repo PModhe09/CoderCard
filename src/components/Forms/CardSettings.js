@@ -4,8 +4,12 @@ import Image from "next/image";
 import SubmitButton from "../Buttons/SubmitButton";
 import { grabCardOwnerInfo } from "@/app/actions/grabCardOwnerInfo";
 import toast from "react-hot-toast";
+import { useState } from "react";
 
 export default   function CardSettings({card,user}){
+    const [coverType,setCoverType] = useState(card.coverType);
+    const [coverColor,setColor] = useState(card.coverColor);
+    const [coverImage,setCoverImage] = useState(card.coverImage);
     const saveCardOwnerInfo=async(formData)=>{
        console.log(formData.get('cardOwnerDisplayName'));
        console.log(formData.get('currentLocation'));
@@ -19,14 +23,64 @@ export default   function CardSettings({card,user}){
         console.log({res});
         console.log('carowner');
     }
+
+    const handleFileSubmit=(event)=>{
+        const file = event.target.files?.[0];
+        console.log(file);
+        if(file){
+            const data = new FormData;
+            data.set('file',file);
+            fetch('/api/upload',{
+                method:'POST',
+                body:data,
+            }).then(response=>{
+                response.json().then(link=>{
+                    //console.log(link);
+                    setCoverImage(link);
+                })
+            })
+        }
+    }
     return(
        <div className="-m-4">
           <form action={saveCardOwnerInfo}>
-            <div className="bg-gray-200 h-32 flex justify-center items-center">
-             <RadioTogglers options={[
-                {name:'color',label:'Color'},
-                {name:'image',label:'Label'},
-             ]} selected="" onChange={()=>{}}/>
+            <div className="bg-gray-200 py-16 flex justify-center items-center" style={
+              coverType === 'color'
+                ? {backgroundColor:coverColor}
+                : {backgroundImage:`url(${coverImage})`}
+            }>
+            <div>
+            <RadioTogglers defaultValue={card?.coverType}  options={[
+                {value:'color',label:'Color'},
+                {value:'image',label:'file'},
+             ]} selected="" onChange={(val)=>{setCoverType(val)}}/>
+             <input type="hidden" name="coverImage" value={coverImage} />
+             {
+                coverType === 'color' &&(
+                    <div className="bg-white shadow-md text-gray-500 p-2 mt-2">
+                    <div className="mt-2 flex justify-center gap-2">
+                    <input type='color' name="coverColor" defaultValue={coverColor}  onChange={e=>setColor(e.target.value)}/>
+                    <span> Pick color</span>
+                    </div>
+                    </div>
+                )
+             }
+             {
+                coverType === 'image' &&(
+                    <div className="bg-white shadow-md text-gray-500 p-2 mt-2">
+                    <div className="flex justify-center">
+                     <label className='bg-white shadow px-4 py-4 mt-2'>
+                     <input type='file' className="hidden" onChange={handleFileSubmit}/>
+                     </label>
+                    Pick Image
+                    </div>
+                    </div>
+                )
+             }
+             
+             
+            </div>
+             
             </div>
               
             <div className="flex justify-center">

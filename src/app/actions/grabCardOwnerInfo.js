@@ -7,21 +7,33 @@ import { UserPage } from "../models/UserPage";
 export async function grabCardOwnerInfo(formData){
     await mongoose.connect(process.env.MONGODB_URI);
     const session = await getServerSession(authOptions);
-    console.log(10,session);
-    for (const value of formData.values()) {
-        console.log(value);
-      }
-      
+   // console.log(10,session);
+    
     if(session){
-        const cardOwnerDisplayName = formData.get('cardOwnerDisplayName');
-        const currentLocation = formData.get('currentLocation');
-        const bio = formData.get('bio');
-        console.log(cardOwnerDisplayName+currentLocation+bio)
+        const dataKeys=[
+            'cardOwnerDisplayName',
+            'currentLocation',
+            'bio',
+            'coverType',
+            'coverColor',
+            'coverImage',
+        ]
+    
+
+    const dataToUpdate={};
+    for(const key of dataKeys){
+        if(formData.has(key)){
+            dataToUpdate[key]=formData.get(key);
+        }
+    }
+    console.log(9,dataToUpdate)
+      
         await UserPage.updateOne(
             {pageOf:session?.user?.email},
-            {cardOwnerDisplayName,currentLocation,bio},
+            dataToUpdate,
         )
         return true;
     }
+
     return false
 }
