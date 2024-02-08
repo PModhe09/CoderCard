@@ -37,3 +37,24 @@ export async function grabCardOwnerInfo(formData){
 
     return false
 }
+
+export async function saveUserProfiles(formData){
+    mongoose.connect(process.env.MONGODB_URI);
+    const session = await getServerSession(authOptions);
+
+    if(session){
+      const profileValues = {};
+      formData.forEach((value,key)=>{
+        profileValues[key] = value;
+      });
+      const dataToUpdate = {profileLinks:profileValues};
+      console.log(dataToUpdate);
+      await UserPage.updateOne(
+        {pageOf:session?.user?.email},
+        dataToUpdate,
+      );
+      console.log("profile db me gyi")
+      return true;
+    }
+    return false;
+}

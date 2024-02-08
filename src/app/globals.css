@@ -28,3 +28,7 @@ label.card-input-user-info{
 input[type="text"],textarea{
   @apply bg-gray-300 w-full block py-2 px-2 mb-2;
 }
+
+.sortable-ghost{
+  opacity: 3;
+}

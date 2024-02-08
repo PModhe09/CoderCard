@@ -8,6 +8,7 @@ const UserInfoSchema = new Schema({
     coverType:{type:String,default:'color'},
     coverColor:{type:String,default:'#000'},
     coverImage:{type:String,default:''},
+    profileLinks:{type:Object,default:{}},
 },{timestamps:true})
 
 export const UserPage =models?.UserPage ||  model('UserPage',UserInfoSchema);

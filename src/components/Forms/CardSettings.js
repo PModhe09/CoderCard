@@ -5,6 +5,8 @@ import SubmitButton from "../Buttons/SubmitButton";
 import { grabCardOwnerInfo } from "@/app/actions/grabCardOwnerInfo";
 import toast from "react-hot-toast";
 import { useState } from "react";
+import CardLinksForm from "./CardLinksForm";
+
 
 export default   function CardSettings({card,user}){
     const [coverType,setCoverType] = useState(card.coverType);
@@ -107,6 +109,7 @@ export default   function CardSettings({card,user}){
                 </div>
             </div>
           </form>
+          <CardLinksForm card={card} user={user}/>
        </div>
     )
 }
