@@ -1,5 +1,5 @@
 import { Inter } from "next/font/google";
-import "../globals.css";
+ import "../globals.css";
 import Navbar from "@/components/Navbar";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../api/auth/[...nextauth]/route";
@@ -9,6 +9,8 @@ import Link from "next/link";
 import LogoutWithGoogle from "@/components/Buttons/LogoutWithGoogle";
 import ClientPageAside from "@/components/layouts/ClientPageAside";
 import { Toaster } from "react-hot-toast";
+import mongoose from "mongoose";
+import { UserPage } from "../models/UserPage";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -23,6 +25,10 @@ export default async function ClientPageLayout({ children }) {
     if(!session){
         redirect('/');
     }
+
+    mongoose.connect(process.env.MONGODB_URI)
+    const card = await UserPage.findOne({pageOf:session?.user?.email})
+    console.log(card)
   return (
     <html lang="en">
       <body className={inter.className}>
@@ -32,9 +38,17 @@ export default async function ClientPageLayout({ children }) {
                 <div>
                 <Image alt={'profile'} src={session.user.image} width={64} height={48}
                 />
+                {
+                  card && (
+                    <Link target="_blank" href={'/'+card.username} className="text-center text-black">
+                      UserName
+                    </Link>
+                  )
+                }
                 </div>
                 <ClientPageAside/>
              </aside>
+             
              <div className="grow">
                <div className="bg-white shadow w-full m-4 p-4">
                {children}
