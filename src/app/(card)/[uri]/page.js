@@ -1,10 +1,12 @@
 import Image from "next/image";
 import Link from "next/link";
+import mongoose from "mongoose";
+
 import { UserPage } from "@/app/models/UserPage";
 import { User } from "@/app/models/UserSchema";
 
 
-import mongoose from "mongoose";
+
 
 export default async  function Card({params}){
     const username = params.uri;
@@ -14,8 +16,8 @@ export default async  function Card({params}){
      console.log(user);
      console.log(card);
     return(
-        <div>
-            <div className="h-36  bg-gray-300 bg-cover bg-center" style={card.coverType === 'color' ? {backgroundColor:card.coverColor}:{backgroundImage:`url($(card.coverImage))`}}>
+        <div className="">
+            <div className="h-36  bg-cover bg-center" style={card.coverType === 'color' ? {backgroundColor:card.coverColor}:{backgroundImage:`url($(card.coverImage))`}}>
             </div>
             <div>
               <div className="w-36 h-36 mx-auto relative -top-14">
@@ -28,10 +30,10 @@ export default async  function Card({params}){
             <div className="flex gap-2 justify-center">
   {
     Object.keys(card.profileLinks).map((key, index) => (
-      <div key={index}>
+      <div key={index} className="">
         {console.log(card.profileLinks[key])}
         {/* You can render the value or perform other operations here */}
-        <Link targe="_blank" href={card.profileLinks[key]}>{key}</Link>
+        <Link targe="_blank" href={card.profileLinks[key]} className="ml-6 bg-green-400 text-lg">{key}</Link>
       </div>
     ))
   }

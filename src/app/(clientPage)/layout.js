@@ -8,6 +8,7 @@ import { redirect } from "next/navigation";
 import Link from "next/link";
 import LogoutWithGoogle from "@/components/Buttons/LogoutWithGoogle";
 import ClientPageAside from "@/components/layouts/ClientPageAside";
+import { FaRegAddressCard } from "react-icons/fa";
 import { Toaster } from "react-hot-toast";
 import mongoose from "mongoose";
 import { UserPage } from "../models/UserPage";
@@ -34,14 +35,16 @@ export default async function ClientPageLayout({ children }) {
       <body className={inter.className}>
          <main className="flex min-h-screen">
              <aside className="bg-blue-100 max-w-md p-4">
-                aside stuff
                 <div>
-                <Image alt={'profile'} src={session.user.image} width={64} height={48}
+                <Image alt={'profile'} src={session.user.image} width={150} height={48} className="rounded-full"
                 />
                 {
                   card && (
-                    <Link target="_blank" href={'/'+card.username} className="text-center text-black">
-                      UserName
+                    <Link target="_blank" href={'/'+card.username} className="text-center text-black mx-auto font-semibold block mt-2 underline">
+                      <span className="flex gap-1 justify-center items-center">
+                      <FaRegAddressCard/>
+                      codercard.com/{card.username}
+                      </span>
                     </Link>
                   )
                 }

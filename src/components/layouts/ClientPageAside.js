@@ -7,9 +7,9 @@ export default function ClientPageAside(){
     const path = usePathname();
     console.log(path);
     return(
-        <nav className="flex flex-col text-center mt-8 gap-4">
-                   <Link href={'/account'} className={"flex gap-4 mx-auto"+ (path==='/account' ? 'text-blue-500 font-bold ':'')}><span>My Card</span></Link>
-                   <Link href={'/analytics'} className={"flex gap-4 mx-auto"+ (path==='/analytics' ? 'text-blue-500 font-bold ':'')}><span>Analytics</span></Link>
+        <nav className="flex flex-col text-center mt-20 gap-4">
+                   <Link href={'/account'} className={"flex gap-4 mx-auto"+ (path==='/account' ? 'flex gap-4 mx-auto text-xl text-white bg-green-400 rounded-full p-2':'')}><span>My Card</span></Link>
+                   <Link href={'/analytics'} className={"flex gap-4 mx-auto"+ (path==='/analytics' ? 'flex gap-4 mx-auto text-xl text-white bg-green-400 rounded-full p-2 ':'')}><span>Analytics</span></Link>
                    {/* <button type="button" className="flex gap-4" onClick={()=>{}}>
                     <span>Logout</span>
                    </button> */}
