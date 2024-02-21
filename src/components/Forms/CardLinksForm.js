@@ -9,6 +9,12 @@ import { ReactSortable } from "react-sortablejs";
 const websites = [
     {key:'github','label':'Github'},
     {key:'leetcode','label':'Leetcode'},
+    {key:'linkedin','label':'Linkedin'},
+    {key:'codeforces',label:'Codeforces'},
+    {key:'codechef',label:'Codechef'},
+    {key:'atcoder',label:'Atcoder'},
+    {key:'codestudio',label:'Codestudio'},
+    {key:'peerlist',label:'Peerlist'}
 ]
 export default function CardLinksForm({card,user}){
 
